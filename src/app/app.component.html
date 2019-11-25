@@ -1,0 +1,297 @@
+<div [ngClass]="btnToggle ? 'd-flex toggled' : 'd-flex'" id="wrapper">
+
+  <!-- Sidebar -->
+  <div class="bg-dark border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading text-white">Primeng</div>
+    <div class="list-group list-group-flush">
+      <a href="#" (click)="openAccordion()"
+        class="list-group-item list-group-item-action bg-dark text-white">Accordion</a>
+      <a href="#" (click)="openDropdown()"
+        class="list-group-item list-group-item-action bg-dark text-white">Dropdown</a>
+      <a href="#" (click)="openLightBox()"
+        class="list-group-item list-group-item-action bg-dark text-white">LightBox</a>
+      <a href="#" (click)="openTabs()" class="list-group-item list-group-item-action bg-dark text-white">Tabs</a>
+      <a href="#" (click)="openRating()" class="list-group-item list-group-item-action bg-dark text-white">Input
+        Rating</a>
+      <a href="#" (click)="openSlider()" class="list-group-item list-group-item-action bg-dark text-white">Input
+        Slider</a>
+      <a href="#" (click)="openTable()" class="list-group-item list-group-item-action bg-dark text-white">Table
+      </a>
+      <a href="#" (click)="openDataView()" class="list-group-item list-group-item-action bg-dark text-white">DataView
+      </a>
+      <a href="#" (click)="openChart()" class="list-group-item list-group-item-action bg-dark text-white">Chart
+      </a>
+      <a href="#" (click)="openToast()" class="list-group-item list-group-item-action bg-dark text-white">Toast
+      </a>
+      <a href="#" (click)="showDatepicker()" class="list-group-item list-group-item-action bg-dark text-white">Date
+        Picker
+      </a>
+      <!-- <a href="#" (click)="openCarousel()" class="list-group-item list-group-item-action bg-dark text-white">Carousel
+      </a> -->
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom">
+      <button class="btn btn-primary" id="menu-toggle" (click)="toggleMenu();">Toggle Menu</button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div *ngIf="accordion">
+        <p-accordion *ngFor="let accordion of accordionData">
+          <p-accordionTab [header]="accordion.name">
+            {{accordion.message}}
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+    <div *ngIf="dropdown">
+      <p-dropdown [options]="primeDropdown" [(ngModel)]="selectedDropdown" optionLabel="name"></p-dropdown>
+      Selected Name : {{selectedDropdown?.name}}
+    </div>
+    <div *ngIf="lightBox">
+      <p-lightbox [images]="images" easing="ease-in" effectDuration="1500ms"></p-lightbox>
+    </div>
+    <div *ngIf="tabs">
+      <p-tabMenu [model]="primeTabs" [activeItem]="primeTabs[0]"></p-tabMenu>
+    </div>
+    <div *ngIf="rating">
+      <h3 class="first">Rating Value: {{inputRating}}</h3>
+      <p-rating [(ngModel)]="inputRating" (onRate)="handleRate($event)" (onCancel)="handleCancel($event)"></p-rating>
+      <span *ngIf="ratingMessag" style="margin-left:10px">{{ratingMessag}}</span>
+    </div>
+    <div *ngIf="slider">
+      <h3 class="first">Input Slider: {{inputSlider}}</h3>
+      <p-slider [(ngModel)]="inputSlider" [style]="{'width':'14em'}"></p-slider>
+    </div>
+    <div *ngIf="table">
+      <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+      <p-table #dt [columns]="cols" [value]="primeTable" [paginator]="true" [rows]="2">
+        <ng-template pTemplate="caption">
+          List of Students
+          <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter"
+              (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+              </p-sortIcon>
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+          <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'name'" pInputText type="text"
+                (input)="dt.filter($event.target.value, col.field, 'contains')">
+              <p-dropdown *ngSwitchCase="'department'" [options]="departments" [style]="{'width':'100%'}"
+                (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-canditate="rowData" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+              {{rowData[col.field]}}
+            </td>
+            <td>
+              <button type="button" pButton icon="pi pi-pencil" class="ui-button-info"
+                (click)="editStudent(rowData);"></button>
+              <button type="button" pButton icon="pi pi-trash" class="ui-button-danger" (click)="deleteStudent();"
+                style="margin-left: 10px;"></button>
+            </td>
+
+          </tr>
+          <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+            <ng-template let-message pTemplate="message">
+              <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+              </div>
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                  <button type="button" pButton (click)="deleteConfirm(rowData)" label="Yes"
+                    class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                  <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+                </div>
+              </div>
+            </ng-template>
+          </p-toast>
+          <p-dialog header="Student Details" [(visible)]="display" [modal]="true" [responsive]="true"
+            [style]="{width: '500px'}">
+            <form>
+              <div class="ui-g ui-fluid" *ngIf="candidate">
+                <div class="ui-g-8">
+                  <strong><label for="name">Name</label></strong>
+                  <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+                    <input type="text" name="name" [(ngModel)]="candidate.name" pInputText placeholder="Student Name">
+                  </div>
+                </div>
+                <div class="ui-g-8">
+                  <strong><label for="name">College</label> </strong>
+                  <div class="ui-inputgroup">
+                    <input type="text" name="college" [(ngModel)]="candidate.college" pInputText
+                      placeholder="College Name">
+                  </div>
+                </div>
+                <div class="ui-g-8">
+                  <strong><label for="name">Department</label></strong>
+                  <div class="ui-inputgroup">
+                    <input type="text" name="department" [(ngModel)]="candidate.department" pInputText
+                      placeholder="Department">
+                  </div>
+                </div>
+              </div>
+            </form>
+            <p-footer>
+              <button type="button" pButton icon="pi pi-check" (click)="updateStudent();" label="Update"></button>
+              <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No"
+                class="ui-button-secondary"></button>
+            </p-footer>
+          </p-dialog>
+        </ng-template>
+      </p-table>
+    </div>
+    <div *ngIf="dataview">
+      <p-dataView #dv [value]="primeDataView" [paginator]="true" [rows]="20">
+        <p-header>
+          <div class="ui-helper-clearfix">
+            <div class="ui-g">
+              <div class="ui-g-8 ui-md-12" style="text-align:right">
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+              </div>
+            </div>
+          </div>
+        </p-header>
+        <ng-template let-car pTemplate="listItem">
+          <div class="ui-g-12">
+            <div class="car-details">
+              <div>
+                <img [src]="car.image">
+                <div class="ui-g">
+                  <div class="ui-g-8 ui-md-12">Name: <b>{{car.name}}</b></div>
+                  <div class="ui-g-8 ui-md-12">Year: <b>{{car.year}}</b></div>
+                  <div class="ui-g-8 ui-md-12">Color: <b>{{car.color}}</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-car pTemplate="gridItem">
+          <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="car.name" [style]="{'text-align':'center'}">
+              <img [src]="car.image" width="60">
+              <div class="car-detail">{{car.year}} - {{car.color}}</div>
+              <hr class="ui-widget-content" style="border-top:0">
+            </p-panel>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+    <div *ngIf="chart">
+      <p-panel header="Pie Chart" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <p-chart type="pie" [data]="chartdata"></p-chart>
+      </p-panel>
+      <p-panel header="Bar Chart" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <p-chart type="bar" [data]="chartdata"></p-chart>
+      </p-panel>
+      <p-panel header="Doughnut Chart" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <p-chart type="doughnut" [data]="chartdata"></p-chart>
+      </p-panel>
+
+    </div>
+    <div *ngIf="toast">
+      <p-toast [style]="{marginTop: '80px'}"></p-toast>
+      <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+          </div>
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+              <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+              <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+      <p-header>
+        <div class="ui-helper-clearfix">
+          <div class="ui-g">
+            <div class="ui-g-8 ui-md-12" style="text-align:center">
+              <button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-8 ui-md-12" style="text-align:center">
+              <button type="button" pButton (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
+            </div>
+          </div>
+        </div>
+      </p-header>
+    </div>
+    <div *ngIf="datepicker">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-4">
+          <h3>Basic Datepicker</h3>
+          <p-calendar [(ngModel)]="date1"></p-calendar>
+        </div>
+      </div>
+    </div>
+    <!-- <div *ngIf="carousel">
+      <carousel [value]="primeCarousel">
+        <ng-template let-primeCarousel pTemplate="item">
+          Content to display
+        </ng-template>
+      </carousel>
+    </div> -->
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->

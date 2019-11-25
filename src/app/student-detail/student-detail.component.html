@@ -1,0 +1,21 @@
+<p-dialog header="Student Details" [(visible)]="display" [modal]="true" [responsive]="true"
+    [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <form>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-float-label">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+                        <input id="studentname" type="text" pInputText [(ngModel)]="candidate.name" name="name">
+                        <label for="studentname">Student Name</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No"
+            class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>

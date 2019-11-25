@@ -1,0 +1,107 @@
+{
+  "accordion": [
+    {
+      "id": 1,
+      "name": "HCL",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      "id": 2,
+      "name": "L&T Infotech",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      "id": 3,
+      "name": "Infosys",
+      "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    }
+  ],
+  "dropdown": [
+    {
+      "id": 1,
+      "name": "Rabeek",
+      "department": "IT"
+    },
+    {
+      "id": 2,
+      "name": "Ajis",
+      "department": "Civil"
+    }
+  ],
+  "tabs": [
+    {
+      "label": "stats",
+      "icon": "fa fa-fw fa-bar-chart"
+    },
+    {
+      "label": "Calendar",
+      "icon": "fa fa-fw fa-calendar"
+    },
+    {
+      "label": "Documentation",
+      "icon": "fa fa-fw fa-book"
+    },
+    {
+      "label": "Support",
+      "icon": "fa fa-fw fa-support"
+    }
+  ],
+  "carousel": [
+    {
+      "item-name": "Audi",
+      "image": "https://raw.githubusercontent.com/primefaces/primeng/master/src/assets/showcase/images/demo/car/Audi.png"
+    },
+    {
+      "item-name": "Benz",
+      "image": "https://raw.githubusercontent.com/primefaces/primeng/master/src/assets/showcase/images/demo/car/Mercedes.png"
+    },
+    {
+      "item-name": "Renault",
+      "image": "https://github.com/primefaces/primeng/blob/master/src/assets/showcase/images/demo/car/Renault.png"
+    },
+    {
+      "item-name": "Jaguar",
+      "image": "https://github.com/primefaces/primeng/blob/master/src/assets/showcase/images/demo/car/Jaguar.png"
+    }
+  ],
+  "table": [
+    {
+      "id": 1,
+      "name": "Mohamed Rabeek",
+      "college": "PSNACET",
+      "department": "IT"
+    },
+    {
+      "id": 2,
+      "name": "Abdul Ajis",
+      "college": "Anna University",
+      "department": "Civil"
+    },
+    {
+      "id": 3,
+      "name": "Siva Kumar",
+      "college": "Alagappa University",
+      "department": "Mechanical"
+    },
+    {
+      "id": 4,
+      "name": "Shankar",
+      "college": "MIT University",
+      "department": "CSC"
+    }
+  ],
+  "dataview": [
+    {
+      "name": "Audi",
+      "image": "https://raw.githubusercontent.com/primefaces/primeng/master/src/assets/showcase/images/demo/car/Audi.png",
+      "year": 2009,
+      "color": "red"
+    },
+    {
+      "name": "Benz",
+      "image": "https://raw.githubusercontent.com/primefaces/primeng/master/src/assets/showcase/images/demo/car/Mercedes.png",
+      "year": 2011,
+      "color": "white"
+    }
+  ]
+}
